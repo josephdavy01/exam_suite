@@ -1,0 +1,394 @@
+<?php
+include 'config.php';
+$msg = "";
+$connection = mysqli_connect("localhost", "root", "");
+
+$db = mysqli_select_db($connection, 'exam_suite');
+
+if (isset($_POST['submit'])) {
+
+    $username = $_POST['username'];
+
+    $pswd = $_POST['password'];
+
+    $query = mysqli_query($connection, "select username, password from users where username='$username' and password='$pswd'");
+
+    if ($query) {
+
+        if (mysqli_num_rows($query) > 0) { //returns rows of data from table
+
+            $msg = "<script>alert('Login Success');
+         window.location.replace('Faculty Dashboard.php');</script>";
+        } else {
+
+            $msg = "<script>alert('Login failed');</script>";
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("vector\ 3.svg");
+            background-repeat: no-repeat;
+            position: relative;
+            background-size: 100%;
+
+        }
+
+        .login {
+            position: relative;
+            height: 450px;
+            width: 800px;
+            left: 350px;
+            top: 150px;
+            
+            background-color: #FF416C;
+            box-shadow: 13px 13px 20px #b33250, -13px -13px 20px #e7365f;
+            border-radius: 50px;
+            transition: 0.5s;
+            display: block;
+        }
+
+        .registerpage {
+            position: absolute;
+            left: 20px;
+            top: -50px;
+            transition: 0.5s;
+
+        }
+
+        .Forgot {
+            position: absolute;
+            left: 500px;
+            top: -50px;
+            transition: 0.5s;
+            opacity: 0;
+
+        }
+
+        .username,
+        .password {
+            position: relative;
+            margin-top: 50px;
+            top: 40px;
+            width: 275px;
+            height: 45px;
+            left: 70px;
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            border: none;
+            box-shadow: inset 8px 8px 15px #ca3a5c, inset -8px -8px 15px #e7365f;
+            text-align: center;
+            border-radius: 25px;
+            outline: none;
+
+        }
+
+        .submit {
+            position: relative;
+            margin-top: 50px;
+            top: 50px;
+            width: 200px;
+            height: 45px;
+            left: 105px;
+            background-color: #FF416C;
+            color: white;
+            font-size: 16px;
+            border: none;
+            box-shadow: 8px 8px 15px #ca3a5c, -8px -8px 15px #e7365f;
+            text-align: center;
+            border-radius: 25px;
+            outline: none;
+            transition: 0.5s ease-in-out;
+            transform: scale(1);
+        }
+
+        .submit:hover {
+            transform: scale(1.05);
+        }
+
+        .username::-webkit-input-placeholder {
+            color: #ffffff;
+            opacity: 65%;
+        }
+
+        .password::-webkit-input-placeholder {
+            color: #ffffff;
+            opacity: 65%;
+        }
+
+        #open {
+            position: relative;
+            color: #FF416C;
+            left: 800px;
+            top: 210px;
+            cursor: pointer;
+
+        }
+
+        .btn1 {
+            position: absolute;
+            background-color: white;
+            color: #FF416C;
+            height: 45px;
+            font-weight: 600;
+            font-family: sans-serif;
+            width: 140px;
+            text-align: center;
+            border: transparent;
+            border-radius: 15px;
+            top: 650px;
+            left: 615px;
+
+        }
+
+        #close {
+            position: relative;
+            color: #FF416C;
+            left: 915px;
+            top: 210px;
+            cursor: pointer;
+
+        }
+
+        .btn2 {
+            position: absolute;
+            background-color: white;
+            color: #FF416C;
+            height: 45px;
+            font-weight: 600;
+            font-family: sans-serif;
+            width: 140px;
+            text-align: center;
+            border: transparent;
+            border-radius: 15px;
+            top: 650px;
+            left: 815px;
+
+
+        }
+
+        .reg {
+            position: relative;
+            color: white;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            top: 50px;
+        }
+
+
+
+
+        .load1 {
+            position: absolute;
+            background-color: white;
+            height: 15px;
+            width: 15px;
+            top: 350px;
+            left: 25px;
+            border-radius: 25px;
+            animation: load1 0.5s ease-in-out infinite;
+
+        }
+
+        @keyframes load1 {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .load2 {
+            position: absolute;
+            background-color: white;
+            height: 15px;
+            width: 15px;
+            top: 350px;
+            left: 45px;
+            border-radius: 25px;
+            animation: load2 0.5s ease-in-out infinite;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes load2 {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .load3 {
+            position: absolute;
+            background-color: white;
+            height: 15px;
+            width: 15px;
+            top: 350px;
+            left: 65px;
+            border-radius: 25px;
+            animation: load3 0.5s ease-in-out infinite;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes load3 {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .load4 {
+            position: absolute;
+            background-color: white;
+            height: 15px;
+            width: 15px;
+            top: 350px;
+            left: 85px;
+            border-radius: 25px;
+            animation: load4 0.5s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes load4 {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .load {
+            position: fixed;
+            background-color: #000000a1;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        }
+
+        #overlay {
+            position: absolute;
+            top: 15px;
+            left: 800px;
+
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST">
+        <div class="login" id="login">
+            <div class="registerpage" id="2nd">
+                <h2 class="reg" id="reg">Feedback</h2>
+                <input type="text" name="username" id="name" class="username" placeholder="UserName" required />
+                <!--<input type="password" name="password" id="password" class="password" placeholder="Password" required />-->
+                <button type="submit" class="submit" name="submit" onclick="passvalues()">Login</button>
+
+            </div>
+        </div>
+        </div>
+
+        <div class="alert" id="alert">
+            <?php echo $msg; ?>
+
+
+        </div>
+    </form>
+
+    <div class="hide">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/hjdMEav789s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/2t5OU3VcAIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/t0uRUruq2tk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/KcTH8jDIlMQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function passvalues() {
+          var name=document.getElementById("name").value;
+          localStorage.setItem("textvalues",name);
+          return false;
+        }
+
+        function openNav() {
+            document.getElementById("1st").style.marginLeft = "0px";
+            document.getElementById("2nd").style.marginLeft = "0px";
+            document.getElementById("1st").style.opacity = "0";
+            document.getElementById("2nd").style.opacity = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("1st").style.marginLeft = "-480px";
+            document.getElementById("2nd").style.marginLeft = "450px";
+            document.getElementById("1st").style.opacity = "100%";
+            document.getElementById("2nd").style.opacity = "0";
+        }
+
+        var overlay = document.getElementById("overlay");
+
+        window.addEventListener('load', function() {
+            overlay.style.display = 'none';
+        })
+
+        function send_otp() {
+            var email = jQuery('#email').val();
+            jQuery.ajax({
+                url: 'send_otp.php',
+                type: 'post',
+                data: 'email=' + email,
+                success: function(result) {
+
+                }
+
+            })
+
+        }
+    </script>
+
+
+
+</body>
+
+</html>

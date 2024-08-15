@@ -1,0 +1,35 @@
+<?php
+include "config.php";
+$otp_str=str_shuffle("0123456789");
+$otp=substr($otp_str,0, 9);
+
+$act_str=rand(10000,1000000);
+$activation_code=str_shuffle("abcdefghijklmnopqrstuvwxyz".$act_str);
+
+if(isset($_POST['submit'])){
+    $otp=$_POST['otp'];
+    $activation_code=$_POST['activation_code'];
+    $reg=mysqli_real_escape_string($conn,$_POST['reg']);
+    $password=mysqli_real_escape_string($conn,md5($_POST['password']));
+
+    $selectDatabase = "SELECT FROM student where email ='".$email."' ";
+    $selectResult = mysqli_query($conn, $selectDatabase);
+    if(mysqli_num_rows($selectResult)>1){
+         $selectRow = mysqli_fetch_assoc($selectResult);
+         $status = $selectRow['status'];
+        
+         if($status == 'active') {
+             echo"<script>alert('Email already registered')</script>";
+         }else{
+             $sqlUpdate="UPDATE student SET reg ='".$reg."',password='".$password."',otp='".$otp."',activation_code='".$activation_code."'";
+             $updateResult=mysqli_query($conn,$sqlUpdate);
+              if($updateResult){
+                  
+              }
+         }
+    
+        }
+    
+}
+
+?>
